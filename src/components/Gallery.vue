@@ -18,7 +18,6 @@
         created() {
             this.wrapperId = Math.random().toString(36).substring(7);
             this._event = (msg) => {
-                console.log(msg);
                 this.calculateBack(msg);
             };
             this._eventUse = (msg) => {
@@ -30,12 +29,12 @@
         methods: {
             calculateBack(distPerc) {
                 let posOfBar = (distPerc * this.holderWidth) / 100;
-                console.log(posOfBar);
                 document.getElementById(this.wrapperId).scrollLeft = posOfBar;
             },
             onWheel(event) {
-                console.log(event);
-                document.getElementById(this.wrapperId).scrollLeft += event.deltaX > 0 ? 20 : -20;
+                document.getElementById(this.wrapperId).scrollLeft = event.deltaX;
+                const percent = (event.deltaX / this.holderWidth) * 100;
+                scrollBus.$emit('wheel', precent);
             },
         },
         computed: {

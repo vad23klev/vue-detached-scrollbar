@@ -94,6 +94,9 @@
                 const bar = document.getElementById(this.barId);
                 return this.elementPos(bar);
             },
+            clickableAreaLength() {
+                return this.barWidth - this.sliderWidth;
+            }
         },
         created() {
             this.barId = Math.random().toString(36).substring(7);
@@ -102,9 +105,16 @@
                 this.use = msg;
             };
             scrollBus.$on('use', this._event);
+            this._eventWheel = (msg) => {
+                const displayPerc = (this.clickableAreaLength * msg / 100).toFixed(1);
+                const slider = document.getElementById(this.sliderId);
+                slider.style.left = displayPerc + 'px';
+            };
+            scrollBus.$on('wheel', this._eventWheel);
         },
         beforeDestroy() {
             this._event && scrollBus && scrollBus.$off('use', this._event);
+            this._eventWheel && scrollBus && scrollBus.$off('wheel', this._eventWheel);
         }
     };
 </script>
