@@ -1,5 +1,5 @@
 <template>
-    <div class="scrollbar-wrapper">
+    <div v-if="use" class="scrollbar-wrapper">
         <div @click="calculatePosition" :id="barId" class="scrollbar">
             <div @mousedown="bindMouseDown" @mouseup="clear" :id="sliderId" class="scrollbar-slider"></div>
         </div>
@@ -14,6 +14,7 @@
             return{
                 barId: '',
                 sliderId: '',
+                use: true,
             };
         },
         methods: {
@@ -97,6 +98,13 @@
         created() {
             this.barId = Math.random().toString(36).substring(7);
             this.sliderId = Math.random().toString(36).substring(7);
+            this._event = (msg) => {
+                this.use = msg;
+            };
+            scrollBus.$on('use', this._event);
         },
+        beforeDestroy() {
+            this._event && scrollBus && scrollBus.$off('use', this._event);
+        }
     };
 </script>
