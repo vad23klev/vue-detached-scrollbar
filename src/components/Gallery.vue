@@ -35,6 +35,7 @@
             },
             onWheel(event) {
                 console.log(event);
+                document.getElementById(this.wrapperId).scrollLeft += event.deltaX > 0 ? 20 : -20;
             },
         },
         computed: {
