@@ -19,9 +19,7 @@
         methods: {
             bindMouseDown() {
                 document.onmousemove = this.calculatePosition;
-                document.onmouseup = () => {
-                    document.onmousemove = null;
-                };
+                document.onmouseup = this.clear;
             },
             clear() {
                 document.onmousemove = null;
