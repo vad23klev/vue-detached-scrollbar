@@ -16,9 +16,10 @@
         },
         created() {
             this.wrapperId = Math.random().toString(36).substring(7);
-            scrollBus.$on('change', (msg) => {
+            this._event = (msg) => {
                 this.calculateBack(msg);
-            });
+            };
+            scrollBus.$on('change', this._event);
         },
         methods: {
             calculateBack(distPerc) {
@@ -33,5 +34,8 @@
                 return full - client;
             },
         },
-    }; 
+        beforeDestroy() {
+            this._event && scrollBus && scrollBus.$off('change', this._event)
+        },
+    };
 </script>

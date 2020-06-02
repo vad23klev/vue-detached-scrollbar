@@ -29,7 +29,6 @@
 
                 // Making the lowest point on the bar zero
                 const absolutePosOnBar = mousePos - this.barOffset;
-                
                 // Half of the slider is insignificant for calculating
                 // the length travelled by it. Hence - (this.sliderWidth / 2)
                 let posOnBar = absolutePosOnBar - (this.sliderWidth / 2);
@@ -41,7 +40,7 @@
                 if (posOnBar > clickableAreaLength) {
                     posOnBar = clickableAreaLength;
                 }
- 
+
                 // If the mouse curser is left or right of the scrollbar
                 // (i.e. not on the scrollbar)
                 // stop doing scrolling
