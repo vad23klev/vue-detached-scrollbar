@@ -22,8 +22,7 @@
                 this.calculateBack(msg);
             };
             this._eventUse = (msg) => {
-                console.log(msg);
-                this.calculateBack(msg);
+                this.use = msg;
             };
             scrollBus.$on('change', this._event);
             scrollBus.$on('use', this._eventUse);
