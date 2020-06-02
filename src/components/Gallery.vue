@@ -32,7 +32,7 @@
                 document.getElementById(this.wrapperId).scrollLeft = posOfBar;
             },
             onWheel(event) {
-                document.getElementById(this.wrapperId).scrollLeft = event.deltaX;
+                document.getElementById(this.wrapperId).scrollLeft += event.deltaX;
                 const percent = (event.deltaX / this.holderWidth) * 100;
                 scrollBus.$emit('wheel', percent);
             },
