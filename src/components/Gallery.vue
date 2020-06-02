@@ -17,6 +17,7 @@
         created() {
             this.wrapperId = Math.random().toString(36).substring(7);
             this._event = (msg) => {
+                console.log(msg);
                 this.calculateBack(msg);
             };
             scrollBus.$on('change', this._event);
@@ -24,6 +25,7 @@
         methods: {
             calculateBack(distPerc) {
                 let posOfBar = (distPerc * this.holderWidth) / 100;
+                console.log(posOfBar);
                 document.getElementById(this.wrapperId).scrollLeft = posOfBar;
             },
         },
