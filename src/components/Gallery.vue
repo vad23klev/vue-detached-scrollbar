@@ -1,5 +1,5 @@
 <template>
-    <div :id="wrapperId" :class="`gallery-wrapper ${use ? '' : 'not-use'}`">
+    <div :id="wrapperId" :class="`gallery-wrapper ${use ? '' : 'not-use'}`" @wheel.shift="onWheel">
         <slot></slot>
     </div>
 </template>
@@ -32,6 +32,9 @@
                 let posOfBar = (distPerc * this.holderWidth) / 100;
                 console.log(posOfBar);
                 document.getElementById(this.wrapperId).scrollLeft = posOfBar;
+            },
+            onWheel(event) {
+                console.log(event);
             },
         },
         computed: {
