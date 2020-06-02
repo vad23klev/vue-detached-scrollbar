@@ -1,5 +1,5 @@
 <template>
-    <div :id="wrapperId" class="gallery-wrapper">
+    <div :id="wrapperId" :class="`gallery-wrapper ${use ? '' : 'not-use'}`">
         <slot></slot>
     </div>
 </template>
@@ -12,6 +12,7 @@
         data() {
             return{
                 wrapperId: '',
+                use: true,
             };
         },
         created() {
@@ -20,7 +21,12 @@
                 console.log(msg);
                 this.calculateBack(msg);
             };
+            this._eventUse = (msg) => {
+                console.log(msg);
+                this.calculateBack(msg);
+            };
             scrollBus.$on('change', this._event);
+            scrollBus.$on('use', this._eventUse);
         },
         methods: {
             calculateBack(distPerc) {
@@ -38,6 +44,7 @@
         },
         beforeDestroy() {
             this._event && scrollBus && scrollBus.$off('change', this._event)
+            this._eventUse && scrollBus && scrollBus.$off('use', this._eventUse)
         },
     };
 </script>
