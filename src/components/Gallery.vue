@@ -34,7 +34,7 @@
             onWheel(event) {
                 document.getElementById(this.wrapperId).scrollLeft = event.deltaX;
                 const percent = (event.deltaX / this.holderWidth) * 100;
-                scrollBus.$emit('wheel', precent);
+                scrollBus.$emit('wheel', percent);
             },
         },
         computed: {
